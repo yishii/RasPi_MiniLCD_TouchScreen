@@ -53,7 +53,7 @@ void i2cOnRequestHandler()
     memset(dataToSend,0,sizeof(dataToSend));
   }
   
-  Wire.write(dataToSend,5);
+  Wire.write(dataToSend,6);
 }
 
 unsigned long tapped_time;
