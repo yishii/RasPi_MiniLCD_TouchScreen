@@ -61,7 +61,7 @@ unsigned long tapped_time;
 void loop() {
   // put your main code here, to run repeatedly: 
 
-  //char str[128];
+  char str[128];
   int x;
   int y;
 
@@ -73,11 +73,11 @@ void loop() {
     touch_y = calcNormalization(y - 116,750 - 116,SCREEN_HEIGHT);
     touch_x = calcNormalization(x -  64,828 -  64,SCREEN_WIDTH);
 
-    //sprintf(str,"(x,y) = (%4d,%4d)",touch_x,touch_y);
-    //Serial.println(str);
+    sprintf(str,"(x,y) = (%4d,%4d)",x,y);
+    Serial.println(str);
 
     touch_invoked = true;
-    //digitalWrite(PIN_LED,HIGH);
+    digitalWrite(PIN_LED,HIGH);
     
     if(tapped_time == 0){
       tapped_time = millis();
@@ -99,9 +99,9 @@ boolean isInRange(int x,int y)
 {
   boolean ret = false;
 
-  if((x > 64) && (x < 828) && (y > 116) && (y < 750)){
+  //if((x > 64) && (x < 828) && (y > 116) && (y < 750)){
     ret = true;
-  }
+  //}
 
   return ret;
 }
@@ -122,8 +122,8 @@ int capturePosition(int mode)
   int ret;
 
   if(mode == 0){
-    pinMode(PIN_Y1,INPUT);
-    pinMode(PIN_Y2,INPUT);
+    pinMode(PIN_Y1,INPUT_PULLUP);
+    pinMode(PIN_Y2,INPUT_PULLUP);
     pinMode(PIN_X1,OUTPUT);
     pinMode(PIN_X2,OUTPUT);
     digitalWrite(PIN_X1,LOW);
@@ -132,8 +132,8 @@ int capturePosition(int mode)
     ret = analogRead(PIN_Y1);
   } 
   else {
-    pinMode(PIN_X1,INPUT);
-    pinMode(PIN_X2,INPUT);
+    pinMode(PIN_X1,INPUT_PULLUP);
+    pinMode(PIN_X2,INPUT_PULLUP);
     pinMode(PIN_Y1,OUTPUT);
     pinMode(PIN_Y2,OUTPUT);
     digitalWrite(PIN_Y1,LOW);
